@@ -1,3 +1,7 @@
+/*
+ * Clase Principal 
+ */
+
 package matricesll;
 import java.util.Scanner;
 /*** @author Luis Angel*/
@@ -9,12 +13,12 @@ public class Principal {
         // TODO code application logic here
         Scanner lector =  new Scanner(System.in);
         
-        ListaLigada objmatrizA = new ListaLigada();
-        ListaLigada objmatrizB = new ListaLigada();
+        MatrizEnLL objmatrizA = new MatrizEnLL();
+        MatrizEnLL objmatrizB = new MatrizEnLL();
         OpMatrices objOp = new OpMatrices();
         
         int numfA, numcA, numfB, numcB ;
-        float dato;
+        int dato;
         
         
         //bloque de codigo para el ingreso de la matriz A  y su dimension 
@@ -26,7 +30,7 @@ public class Principal {
         for(int fila = 1; fila <= numfA ;fila = fila+1 ){
             for(int colum = 1; colum <= numcA ;colum = colum+1 ){
                  System.out.println("Digite el valor del elemento A "+fila+ " - " +colum);
-                 dato = lector.nextFloat();
+                 dato = lector.nextInt();
                  if (dato != 0){
                      objmatrizA.IngresarNuevo(fila,colum, dato);
                  }
@@ -83,11 +87,11 @@ public class Principal {
         
         
         //linea de codigo para hallar la adjunta
-        ListaLigada  objmatrizAdj = objOp.Adjunta(numfA, numcA, objmatrizA);
+        MatrizEnLL  objmatrizAdj = objOp.Adjunta(numfA, numcA, objmatrizA);
   
 
         //bloque de codigo para hallar la inversa
-        ListaLigada objmatrizInv = new ListaLigada();
+        MatrizEnLL objmatrizInv = new MatrizEnLL();
         Tripleta infoAdj = new Tripleta();
         System.out.println("la inversa de la matriz A es:");
         

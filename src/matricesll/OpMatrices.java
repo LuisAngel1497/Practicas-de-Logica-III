@@ -1,31 +1,42 @@
+/*
+ * Esta clase organiza las operaciones 
+ */
 package matricesll;
-/** @author Luis Angel*/
+
+/**
+ *
+ * @author Felipe Cadavid
+ * @author Carolina Diaz
+ * @author Luis Angel Vanegas
+ * @version 14-09-2017
+ * 
+ */
 public class OpMatrices {
 
      //metodo para multiplicar A * B      
-    public ListaLigada Multiplicacion (int numfA, int numcA, int numcB, ListaLigada objmatrizA, ListaLigada objmatrizB){
+    public MatrizEnLL Multiplicacion (int numfA, int numcA, int numcB, MatrizEnLL objmatrizA, MatrizEnLL objmatrizB){
         
-        ListaLigada objmatrizC = new ListaLigada();
+        MatrizEnLL objmatrizC = new MatrizEnLL();
         
-        Info infoA = new Info();
-        Info infoB = new Info();
+        Tripleta infoA;
+        Tripleta infoB;
         
          for(int filaa = 1; filaa <= numfA ;filaa = filaa+1 ){ //recorrera todas las filas de A
                 for(int columb = 1; columb<= numcB ;columb = columb+1 ){//recorrera todas las columnas de B
-                    double valor =0;                    
+                    int valor =0;                    
                     for(int k = 1; k<= numcA ;k = k+1 ){//recorrera las columnas de A
                         
                         infoA = objmatrizA.RecorreA();
-                        while (infoA.dato != 0 ){//recorre toda la lista ligada de la matrizA
+                        while (infoA.getDato() != 0 ){//recorre toda la lista ligada de la matrizA
                             
                             
-                            if (infoA.colum == k && infoA.fila == filaa){// si hay una columna y fila igual a la indicada entonces
+                            if (infoA.getColumna() == k && infoA.getFila() == filaa){// si hay una columna y fila igual a la indicada entonces
                                 //tiene valor mayor a cero y se multiplica por (lo que esta deltro del if del B)
                                 infoB = objmatrizB.RecorreB();
-                                while (infoB.dato != 0 ){//se recorre la matriz B con el fin de multiplicar la fila de A con la columna de B
-                                    if (infoB.colum == columb && infoB.fila == k){// si hay una columna y fila igual a la indicada entonces
+                                while (infoB.getDato() != 0 ){//se recorre la matriz B con el fin de multiplicar la fila de A con la columna de B
+                                    if (infoB.getColumna() == columb && infoB.getFila() == k){// si hay una columna y fila igual a la indicada entonces
                                         //tiene valor mayor a cero y se multiplica por 
-                                        valor = valor + (infoA.dato * infoB.dato);
+                                        valor = valor + (infoA.getDato() * infoB.getDato());
                                     }else{
                                         //es cero
                                        valor= valor+0;
@@ -56,8 +67,8 @@ public class OpMatrices {
     
     //metodo que calcule la determinante
     //por cofactores
-    public double determinate(int numfA, int numcA, ListaLigada objmatrizA){
-        Info infoA = new Info();
+    public double determinate(int numfA, int numcA, MatrizEnLL objmatrizA){
+        Tripleta infoA;
         int i;//fila
         int j;//columna
         
@@ -68,13 +79,13 @@ public class OpMatrices {
         if (numfA == 2 && numcA == 2) {// este caso es por si la matriz es de 2X2
             
             infoA = objmatrizA.RecorreA();
-            while (infoA.dato != 0 ){ //recorrerá toda la lista ligada de A    
+            while (infoA.getDato() != 0 ){ //recorrerá toda la lista ligada de A    
                 
-                    if (infoA.colum == infoA.fila){ //si columna es igual a fila, operará la resta de la diagonal principal
-                        opRest1 = opRest1 * infoA.dato;
+                    if (infoA.getColumna() == infoA.getFila()){ //si columna es igual a fila, operará la resta de la diagonal principal
+                        opRest1 = opRest1 * infoA.getDato();
                         contIngDia=contIngDia+1;
                     }else{//sino opera los que no son de la diagonal principal
-                        opRest2 = opRest2 * infoA.dato;
+                        opRest2 = opRest2 * infoA.getDato();
                         contIngNo = contIngNo+1;
                     }
                     
@@ -103,16 +114,16 @@ public class OpMatrices {
             {
                 
                 //el siguiente es el bloque de codigo para eliminar fila y columna
-                 ListaLigada matrizfilasElim = new ListaLigada();
+                 MatrizEnLL matrizfilasElim = new MatrizEnLL();
                  int fnueva=1;//esta _fnueva es para las filas de la nueva matriz (lista) sin la fila y columna eliminada
                  int cnueva=1;//esta _cnueva es para las columnas de la nueva matriz (lista) sin la fila y columna eliminada
                  
                  infoA = objmatrizA.RecorreA();
-                 while (infoA.dato != 0 ){ //recorrerá toda la lista ligada de A   
+                 while (infoA.getDato() != 0 ){ //recorrerá toda la lista ligada de A   
                      //"eliminamos" la fila i y colum j de A
-                     if(infoA.fila != i && infoA.colum != j){//si el info es distito a los que estan "eliminados" entonces 
+                     if(infoA.getFila() != i && infoA.getColumna() != j){//si el info es distito a los que estan "eliminados" entonces 
                          //se crea nodos en una matriz nueva _matrizfilasElim con esas infos 
-                        matrizfilasElim.IngresarNuevo(fnueva, cnueva, infoA.dato);//creamos nueva matriz
+                        matrizfilasElim.IngresarNuevo(fnueva, cnueva, infoA.getDato());//creamos nueva matriz
                         
                         //el siguiente bloque de codigo de if anidados es para asignarle la fila nueva y la columna nueva a la matriz que se crea anteriormente
                         if(fnueva==1 && cnueva==1){
@@ -144,26 +155,26 @@ public class OpMatrices {
 
     
     //metodo para hallar la adjunta de la matriz dada
-    public ListaLigada Adjunta( int numfA, int numcA, ListaLigada objmatrizA){
-        ListaLigada objmatrizD = new ListaLigada();//la matriz D es la matriz Adjunta resultante
-        Info infoAdj = new Info();
+    public MatrizEnLL Adjunta( int numfA, int numcA, MatrizEnLL objmatrizA){
+        MatrizEnLL objmatrizD = new MatrizEnLL();//la matriz D es la matriz Adjunta resultante
+        Tripleta infoAdj;
         
          if (numfA == 2 && numcA == 2) {// este caso es por si la matriz es de 2X2
             infoAdj = objmatrizA.RecorreA();
-            while (infoAdj.dato != 0 ){ //recorrerá toda la lista ligada de A    
+            while (infoAdj.getDato() != 0 ){ //recorrerá toda la lista ligada de A    
                 
-                if (infoAdj.colum == infoAdj.fila){ //si columna es igual a fila
+                if (infoAdj.getColumna() == infoAdj.getFila()){ //si columna es igual a fila
                     //entonces hablamos de la diagonal principal la cual
-                    if (infoAdj.colum==2){//si la columna es 2 entonces 
-                         objmatrizD.IngresarNuevo(1, 1, infoAdj.dato);//se ingresa en la matriz adjunta, el dato pero con columna y fila = 1
+                    if (infoAdj.getColumna()==2){//si la columna es 2 entonces 
+                         objmatrizD.IngresarNuevo(1, 1, infoAdj.getDato());//se ingresa en la matriz adjunta, el dato pero con columna y fila = 1
                     }else{//sino esporque es 1 y entonces se ingresa con fila y columna iguala  2
-                         objmatrizD.IngresarNuevo(2, 2, infoAdj.dato);
+                         objmatrizD.IngresarNuevo(2, 2, infoAdj.getDato());
                     }
                 }else{//si no es la diagonal principal entonces
-                    if(infoAdj.colum==2 && infoAdj.fila==1){//si la columna es 2 y la fila 1 entonces
-                        objmatrizD.IngresarNuevo(2, 1,((-1)* infoAdj.dato));// se ingresa con fila 2 y columna 1 y se cambia el signo
+                    if(infoAdj.getColumna()==2 && infoAdj.getFila()==1){//si la columna es 2 y la fila 1 entonces
+                        objmatrizD.IngresarNuevo(2, 1,((-1)* infoAdj.getDato()));// se ingresa con fila 2 y columna 1 y se cambia el signo
                     }else{
-                        objmatrizD.IngresarNuevo(1, 2,((-1)* infoAdj.dato));
+                        objmatrizD.IngresarNuevo(1, 2,((-1)* infoAdj.getDato()));
                     }
                 }
                 
@@ -176,15 +187,15 @@ public class OpMatrices {
             for (int jj = 1; jj <= numcA; jj++) {//recorremos toda la fila de la matriz que entra como parametro
                 
                 //el siguiente es el bloque de codigo para eliminar fila y columna. explicado anteriormente
-                ListaLigada matrizfilasElim = new ListaLigada();
+                MatrizEnLL matrizfilasElim = new MatrizEnLL();
                  int fnueva=1;
                  int cnueva=1;
                  
                  infoAdj = objmatrizA.RecorreA();
-                 while (infoAdj.dato != 0 ){ //recorrerá toda la lista ligada de A   
+                 while (infoAdj.getDato() != 0 ){ //recorrerá toda la lista ligada de A   
                      //"eliminamos" la fila i y colum j de A
-                     if(infoAdj.fila != ii && infoAdj.colum != jj){//si el info es distito a los que estan "eliminados" entonces se opera
-                        matrizfilasElim.IngresarNuevo(fnueva, cnueva, infoAdj.dato);//creamos nueva matriz
+                     if(infoAdj.getFila() != ii && infoAdj.getColumna() != jj){//si el info es distito a los que estan "eliminados" entonces se opera
+                        matrizfilasElim.IngresarNuevo(fnueva, cnueva, infoAdj.getDato());//creamos nueva matriz
                         if(fnueva==1 && cnueva==1){
                             fnueva=1;
                             cnueva=2;
@@ -203,7 +214,7 @@ public class OpMatrices {
               //despues que se haya eliminado la fila y columna, calculamos el elemento a adjuntar, por cofactores
               double elementoAdjunto = Math.pow(-1, ii+jj) * this.determinate(numfA,numcA,  matrizfilasElim);          
               if (elementoAdjunto != 0){ //si el elemento a adjuntar es diferente de 0 entonces
-                  objmatrizD.IngresarNuevo(ii, jj, elementoAdjunto);//a la matriz D en la posicion i j se almacena el elemento adjunto. 
+                  objmatrizD.IngresarNuevo(ii, jj, (int) elementoAdjunto);//a la matriz D en la posicion i j se almacena el elemento adjunto. 
                   //LA MATRIZ D ES LA MATRIZ ADJUNTA QUE VA RESULTANDO
               }
                 
@@ -218,14 +229,14 @@ public class OpMatrices {
     
     
     //metodo para obtener la transpuesta de la matriz
-    public ListaLigada Transpuesta( int numfA, int numcA, ListaLigada objmatrizA){
+    public MatrizEnLL Transpuesta( int numfA, int numcA, MatrizEnLL objmatrizA){
 
-        ListaLigada objmatrizE = new ListaLigada();//_objmatrizE es la matriz que contendrá la matriz transpuesta resultante
-        Info infoTrans = new Info();
+        MatrizEnLL objmatrizE = new MatrizEnLL();//_objmatrizE es la matriz que contendrá la matriz transpuesta resultante
+        Tripleta infoTrans;
 
             infoTrans = objmatrizA.RecorreA();
-            while (infoTrans.dato != 0 ){ //recorrerá toda la lista ligada de A (A es la matriz que entra como parametro)
-                objmatrizE.IngresarNuevo(infoTrans.colum, infoTrans.fila, infoTrans.dato); //aquí solo al _objetomatrizE se le agregan los datos que tiene la matriz a transponer
+            while (infoTrans.getDato() != 0 ){ //recorrerá toda la lista ligada de A (A es la matriz que entra como parametro)
+                objmatrizE.IngresarNuevo(infoTrans.getColumna(), infoTrans.getFila(), infoTrans.getDato()); //aquí solo al _objetomatrizE se le agregan los datos que tiene la matriz a transponer
                 //pero las filas serán columnas y las columnas serán filas
                 infoTrans = objmatrizA.RecorreA();
             }

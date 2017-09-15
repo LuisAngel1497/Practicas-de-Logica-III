@@ -1,5 +1,5 @@
 /*
- * Esta clase 
+ * Esta clase almacena los datos fila, columna y dato en una tripleta
  */
 package matricesll;
 
