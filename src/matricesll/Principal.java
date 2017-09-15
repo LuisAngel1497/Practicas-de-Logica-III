@@ -64,7 +64,7 @@ public class Principal {
         }
         //fin bloque de codigo para realizar la multiplicacion
 
-
+          System.out.println("El Resultado de la Multiplicación es: ");
         //mostrar resultado de la multiplicacion
         Tripleta info = objmatrizA.RecorreA();
         while (info.getDato() != 0 ){ //recorrerá toda la lista ligada de A 
