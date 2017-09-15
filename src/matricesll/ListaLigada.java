@@ -1,4 +1,4 @@
-package matriz_dispersa_LL_forma2;
+package matricesll;
 /*** @author Luis Angel*/
 public class ListaLigada {
     

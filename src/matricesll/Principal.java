@@ -1,4 +1,4 @@
-package matriz_dispersa_LL_forma2;
+package matricesll;
 import java.util.Scanner;
 /*** @author Luis Angel*/
 public class Principal {
