@@ -47,7 +47,7 @@ public class Principal {
         for(int fila = 1; fila <= numfB ;fila = fila+1 ){
             for(int colum = 1; colum <= numcB ;colum = colum+1 ){
                  System.out.println("Digite el valor del elemento B "+fila+ " - " +colum);
-                 dato = lector.nextFloat();
+                 dato = lector.nextInt();
                  if (dato != 0){
                      objmatrizB.IngresarNuevo(fila,colum, dato);
                  }
@@ -67,10 +67,10 @@ public class Principal {
 
         //mostrar resultado de la multiplicacion
         Tripleta info = objmatrizA.RecorreA();
-        while (info.dato != 0 ){ //recorrerá toda la lista ligada de A 
-            System.out.println("fila:    "+info.fila);
-            System.out.println("columna: "+info.colum);
-            System.out.println("dato:    "+info.dato);
+        while (info.getDato() != 0 ){ //recorrerá toda la lista ligada de A 
+            System.out.println("fila:    "+info.getFila());
+            System.out.println("columna: "+info.getColumna());
+            System.out.println("dato:    "+info.getDato());
             System.out.println("-----------------------");
             info = objmatrizA.RecorreA();
         }
@@ -92,12 +92,12 @@ public class Principal {
 
         //bloque de codigo para hallar la inversa
         MatrizEnLL objmatrizInv = new MatrizEnLL();
-        Tripleta infoAdj = new Tripleta();
+        Tripleta infoAdj;
         System.out.println("la inversa de la matriz A es:");
         
         infoAdj = objmatrizAdj.RecorreA();
-        while (infoAdj.dato != 0 ){ //recorrerá toda la lista ligada de la matriz adjunta
-            objmatrizInv.IngresarNuevo(infoAdj.fila, infoAdj.colum, (infoAdj.dato/det));//en la lista ligada (_objmatrizInv) se almacena en su respectiva fila y columna correspondiente a la matriz adjunta
+        while (infoAdj.getDato() != 0 ){ //recorrerá toda la lista ligada de la matriz adjunta
+            objmatrizInv.IngresarNuevo(infoAdj.getFila(), infoAdj.getColumna(), ((int) (infoAdj.getDato()/det)));//en la lista ligada (_objmatrizInv) se almacena en su respectiva fila y columna correspondiente a la matriz adjunta
             //el dato de la matriz adjunta, dividido entre el det
             infoAdj = objmatrizAdj.RecorreA();
         }            
@@ -105,10 +105,10 @@ public class Principal {
         
         //mostrar resultado de la inversa
         Tripleta info2 = objmatrizInv.RecorreA();
-        while (info2.dato != 0 ){ //recorrerá toda la lista ligada de A 
-            System.out.println("fila:    "+info2.fila);
-            System.out.println("columna: "+info2.colum);
-            System.out.println("dato:    "+info2.dato);
+        while (info2.getDato() != 0 ){ //recorrerá toda la lista ligada de A 
+            System.out.println("fila:    "+info2.getFila());
+            System.out.println("columna: "+info2.getColumna());
+            System.out.println("dato:    "+info2.getDato());
             System.out.println("-----------------------");
             info2 = objmatrizInv.RecorreA();
         }
