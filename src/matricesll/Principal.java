@@ -62,7 +62,7 @@ public class Principal {
 
 
         //mostrar resultado de la multiplicacion
-        Info info = objmatrizA.RecorreA();
+        Tripleta info = objmatrizA.RecorreA();
         while (info.dato != 0 ){ //recorrerá toda la lista ligada de A 
             System.out.println("fila:    "+info.fila);
             System.out.println("columna: "+info.colum);
@@ -88,7 +88,7 @@ public class Principal {
 
         //bloque de codigo para hallar la inversa
         ListaLigada objmatrizInv = new ListaLigada();
-        Info infoAdj = new Info();
+        Tripleta infoAdj = new Tripleta();
         System.out.println("la inversa de la matriz A es:");
         
         infoAdj = objmatrizAdj.RecorreA();
@@ -100,7 +100,7 @@ public class Principal {
         //fin bloque de codigo para hallar la inversa
         
         //mostrar resultado de la inversa
-        Info info2 = objmatrizInv.RecorreA();
+        Tripleta info2 = objmatrizInv.RecorreA();
         while (info2.dato != 0 ){ //recorrerá toda la lista ligada de A 
             System.out.println("fila:    "+info2.fila);
             System.out.println("columna: "+info2.colum);

@@ -3,7 +3,7 @@ package matricesll;
 public class Nodo {
     
      //siendo [0]ID, [1] nombre, [2] sexo, [3]salario
-     private Info objInfo = new Info();
+     private Tripleta objInfo = new Tripleta();
      private Nodo liga; //atributos
   
     public Nodo (int pfila, int pcolum, double pdato  ){//constructor
@@ -13,7 +13,7 @@ public class Nodo {
         liga = null;
     } //fin constructor
     
-    public Info GetInfo (){ //metodo get
+    public Tripleta GetInfo (){ //metodo get
          return objInfo;
     } //fin metodo get
     

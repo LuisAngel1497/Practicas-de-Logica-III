@@ -3,7 +3,7 @@ package matricesll;
 public class ListaLigada {
     
     private Nodo cab, ult, x;
-    Info objInfo = new Info();
+    Tripleta objInfo = new Tripleta();
     
     public ListaLigada(){ //constructor
         cab = new Nodo(0,0,0); 
@@ -16,7 +16,7 @@ public class ListaLigada {
         ult = p;
     } //fin metodo INGRESAR NUEVO EMPLEADO
   
-    public Info RecorreA(){ // metodo MOSTRAR DATOS DE LA LISTA
+    public Tripleta RecorreA(){ // metodo MOSTRAR DATOS DE LA LISTA
         x = x.RetornaLiga();
             if (x == null){ 
                 x = cab;
@@ -24,7 +24,7 @@ public class ListaLigada {
          return x.GetInfo();
     }// fin metodo MOSTRAR DATOS DE LA LISTA
     
-    public Info RecorreB(){ // metodo MOSTRAR DATOS DE LA LISTA
+    public Tripleta RecorreB(){ // metodo MOSTRAR DATOS DE LA LISTA
         x = x.RetornaLiga();
             if (x == null){ 
                 x = cab;
